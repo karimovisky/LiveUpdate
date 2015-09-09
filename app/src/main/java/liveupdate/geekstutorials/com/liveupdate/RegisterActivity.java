@@ -1,13 +1,17 @@
 package liveupdate.geekstutorials.com.liveupdate;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,8 +32,31 @@ public class RegisterActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast
-                Toast.makeText(getBaseContext(),"You Signed up! Congratulation",Toast.LENGTH_LONG).show();
+
+                //get the username, password and email Convert them to string
+                String username = mUsername.getText().toString().trim();
+                String email = mUserEmail.getText().toString().trim();
+                String password = mUserPassword.getText().toString().trim();
+
+                //store user in parse
+                ParseUser user = new ParseUser();
+                user.setUsername(username);
+                user.setPassword(email);
+                user.setEmail(password);
+
+
+                user.signUpInBackground(new SignUpCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null){
+                            //user signed up success
+                            Toast.makeText(getBaseContext(), "Success Welcome", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            //error signing up user. advice user
+                        }
+                    }
+                });
             }
         });
     }
