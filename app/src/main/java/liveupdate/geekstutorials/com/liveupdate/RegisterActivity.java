@@ -4,13 +4,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    protected EditText mUsername;
+    protected EditText mUserEmail;
+    protected EditText mUserPassword;
+    protected Button mRegisterButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mUsername = (EditText) findViewById(R.id.usernameRegisterEditText);
+        mUserEmail = (EditText) findViewById(R.id.emailRegisterEditText);
+        mUserPassword = (EditText) findViewById(R.id.passwordRegisterEditText);
+        mRegisterButton = (Button) findViewById(R.id.registerButton);
     }
 
     @Override
