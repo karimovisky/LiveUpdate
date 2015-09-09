@@ -1,5 +1,6 @@
 package liveupdate.geekstutorials.com.liveupdate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -23,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "waMH893fzAzWWkv3uRs2eMhT8BI2jvXRjEClFUmG", "j99Ce402LkEUuC1FhOyNVkrMXBHJAuTAL25CFQMv");
+
         mUsername = (EditText) findViewById(R.id.usernameRegisterEditText);
         mUserEmail = (EditText) findViewById(R.id.emailRegisterEditText);
         mUserPassword = (EditText) findViewById(R.id.passwordRegisterEditText);
@@ -41,18 +46,20 @@ public class RegisterActivity extends AppCompatActivity {
                 //store user in parse
                 ParseUser user = new ParseUser();
                 user.setUsername(username);
-                user.setPassword(email);
-                user.setEmail(password);
+                user.setPassword(password);
+                user.setEmail(email);
 
 
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
-                        if (e == null){
+                        if (e == null) {
                             //user signed up success
                             Toast.makeText(getBaseContext(), "Success Welcome", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
+                            //take user home page
+                            Intent takeuserHome = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(takeuserHome);
+                        } else {
                             //error signing up user. advice user
                         }
                     }
