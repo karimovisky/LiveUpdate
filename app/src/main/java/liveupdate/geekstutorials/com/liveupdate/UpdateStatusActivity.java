@@ -40,39 +40,54 @@ public class UpdateStatusActivity extends AppCompatActivity {
                 //get the status from edit text and convert it to string
                 String newStatus = mStatusUpdate.getText().toString();
 
-                //save the status in parse
-                ParseObject statusObject = new ParseObject("Status");
-                statusObject.put("newStatus",newStatus);
-                statusObject.put("username",currentUsername);
-                statusObject.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e==null){
-                            //successfully stored the new status in parse
-                            Toast.makeText(UpdateStatusActivity.this,"Success!", Toast.LENGTH_LONG).show();
-
-                            //take user to the home page
-                            Intent takeUserToHomePage = new Intent(UpdateStatusActivity.this, MainActivity.class);
-                            UpdateStatusActivity.this.startActivity(takeUserToHomePage);
+                if (newStatus.isEmpty()) {
+                    //problem in storing new status advice the user
+                    Toast.makeText(UpdateStatusActivity.this, "Status should not be empty" ,Toast.LENGTH_LONG).show();
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(UpdateStatusActivity.this);
+                    builder.setMessage("Status should not be empty");
+                    builder.setTitle("Oops!");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //close the dialog
+                            dialog.dismiss();
                         }
-                        else {
-                            //problem in storing new status advice the user
-                            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateStatusActivity.this);
-                            builder.setMessage(e.getMessage());
-                            builder.setTitle("Sorry!");
-                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //close the dialog
-                                    dialog.dismiss();
-                                }
-                            });
+                    });*/
+                }
+                else {
+                    //save the status in parse
+                    ParseObject statusObject = new ParseObject("Status");
+                    statusObject.put("newStatus", newStatus);
+                    statusObject.put("username", currentUsername);
+                    statusObject.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                //successfully stored the new status in parse
+                                Toast.makeText(UpdateStatusActivity.this, "Success!", Toast.LENGTH_LONG).show();
 
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
+                                //take user to the home page
+                                Intent takeUserToHomePage = new Intent(UpdateStatusActivity.this, MainActivity.class);
+                                UpdateStatusActivity.this.startActivity(takeUserToHomePage);
+                            } else {
+                                //problem in storing new status advice the user
+                                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateStatusActivity.this);
+                                builder.setMessage(e.getMessage());
+                                builder.setTitle("Sorry!");
+                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //close the dialog
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }
