@@ -49,13 +49,13 @@ public class LoginActivity extends Activity {
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
-                        if (e != null){
+                        if (e == null){
                             //success user logged in
-                            Toast.makeText(getBaseContext(),"Welcome Back", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this,"Welcome Back", Toast.LENGTH_LONG).show();
 
                             //take user to the homepage
                             Intent takeUserHome = new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(takeUserHome);
+                            LoginActivity.this.startActivity(takeUserHome);
                         }else {
                             //sorry there was a problem. advice user
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
