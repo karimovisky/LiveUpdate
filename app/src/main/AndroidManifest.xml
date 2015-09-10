@@ -27,6 +27,10 @@
             android:name=".RegisterActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name=".UpdateStatusActivity"
+            android:label="@string/title_activity_update_status" >
+        </activity>
     </application>
 
 </manifest>
