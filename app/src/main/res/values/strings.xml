@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LiveUpdate</string>
+    <string name="app_name">Live Update</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -8,5 +8,5 @@
 
     <string name="updateStatus">Update</string>
     <string name="LogoutUser">Logout</string>
-    <string name="title_activity_update_status">UpdateStatusActivity</string>
+    <string name="title_activity_update_status">Update Status</string>
 </resources>

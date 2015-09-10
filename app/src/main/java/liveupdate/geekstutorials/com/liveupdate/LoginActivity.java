@@ -27,7 +27,12 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Parse.initialize(this, "waMH893fzAzWWkv3uRs2eMhT8BI2jvXRjEClFUmG", "j99Ce402LkEUuC1FhOyNVkrMXBHJAuTAL25CFQMv");
+        try {
+            Parse.initialize(this, "waMH893fzAzWWkv3uRs2eMhT8BI2jvXRjEClFUmG", "j99Ce402LkEUuC1FhOyNVkrMXBHJAuTAL25CFQMv");
+        }
+        catch (Exception e) {
+
+        }
 
 
         //initialize
@@ -35,6 +40,15 @@ public class LoginActivity extends Activity {
         mPassword = (EditText) findViewById(R.id.passwordLoginTextBox);
         mLoginBtn = (Button) findViewById(R.id.loginBtn);
         mCreateAccountBtn = (Button) findViewById(R.id.createAccountbtnLogin);
+
+        //listen to create account button click
+        mCreateAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takeUserToRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(takeUserToRegisterActivity);
+            }
+        });
 
         //listen to login btn
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
