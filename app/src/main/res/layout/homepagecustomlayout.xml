@@ -6,7 +6,8 @@
         android:id="@+id/usernameHP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="username" />
+        android:text="username"
+        android:drawableLeft="@drawable/"/>
     <TextView
         android:id="@+id/statusHP"
         android:layout_width="fill_parent"
