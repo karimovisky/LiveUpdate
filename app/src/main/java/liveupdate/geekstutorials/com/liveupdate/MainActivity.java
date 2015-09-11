@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -91,5 +94,15 @@ public class MainActivity extends ListActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        ParseObject statusObject = mStatus.get(position);
+        String ObjectId = statusObject.getObjectId();
+
+        Toast.makeText(getApplicationContext(),ObjectId,Toast.LENGTH_LONG).show();
     }
 }
